@@ -10,9 +10,14 @@ Link hasil deploy aplikasi : [link](https://tugas-django-bryan-1.herokuapp.com/k
 * Setelah itu view function akan mengembalikan _response_  dengan format HTML (berkas html).
 * Lalu hasilnya akan dirender oleh template yang akan men-_display_ konten yang akan dilihat oleh user / client.
 
-# Virtual Environment in Django
+## Alasan Virtual Environment dipakai di Django
 Virtual environment merupakan sebuah wadah virtual yang digunakan untuk menampung _dependecies_ dan _library_ agar terisolasi dari _dependencies_ utama. 
 
 Setiap proyek yang akan kita kerjakan, memerlukan _third-party packages_ Python yang unik. Bila kita terus mengunduh semua packages di _environment_ yang sama pada setiap projek, hal itu dapat merusak alat sistem atau proyek sebelumnya yang mempunyai _dependencies_ mereka masing-masing.
 
 Oleh karena itu, setiap kita memulai suatu proyek baru, kita harus meng-_setup_ _virtual environment_ yang baru dengan _dependencies_ dan versinya tertentu untuk sebuah proyek. 
+
+## Proyek Django tanpa Virtual Environment
+Jika kita ingin membuat sebuah proyek Django tanpa Virtual Environment, tentu saja itu sangat memungkinkan. Penggunaan Virtual Environment digunakan untuk mengorganisir _dependencies_ khusus dan versinya pada setiap proyek untuk memisahkan adanya _overlap_ versi _dependencies_ pada setiap proyek dan mencegah gangguan sistem lainnya.
+
+Bila aplikasi yang ingin dibuat hanya aplikasi kecil yang tidak akan digunakan oleh siapa pun selain diri sendiri dan mungkin hanya untuk sementara, maka kita tidak terlalu membutuhkan _virtual environment_.
