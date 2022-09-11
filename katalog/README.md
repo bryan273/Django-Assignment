@@ -21,3 +21,10 @@ Oleh karena itu, setiap kita memulai suatu proyek baru, kita harus meng-_setup_ 
 Jika kita ingin membuat sebuah proyek Django tanpa Virtual Environment, tentu saja itu sangat memungkinkan. Penggunaan Virtual Environment digunakan untuk mengorganisir _dependencies_ khusus dan versinya pada setiap proyek untuk memisahkan adanya _overlap_ versi _dependencies_ pada setiap proyek dan mencegah gangguan sistem lainnya.
 
 Bila aplikasi yang ingin dibuat hanya aplikasi kecil yang tidak akan digunakan oleh siapa pun selain diri sendiri dan mungkin hanya untuk sementara, maka kita tidak terlalu membutuhkan _virtual environment_.
+
+## Langkah-langkah implementasi
+1. Membuat sebuah fungsi pada views.py yang dapat melakukan pengambilan data dari model dan dikembalikan ke dalam sebuah HTML.
+
+Di dalam views.py, dibuat fungsi view (show_katalog) dengan parameter _request_ dari user. Fungsi ini menggunakan class dari model yang akan memanggil query ke database dan menyimpan hasil query tersebut ke dalam variabel data_katalog. Setelah itu, akan dilakukan render ke katalog.html dan ditambahkan pula context pada pengembalian fungsi render yang dapat dimunculkan pada halaman HTML. 
+
+2. Membuat sebuah routing untuk memetakan fungsi yang telah kamu buat pada views.py.
