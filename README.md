@@ -7,5 +7,5 @@ Link hasil deploy aplikasi : [link](https://tugas-django-bryan-1.herokuapp.com/k
 * Ketika user / client melakukan _request_ untuk ke server melalui _link_ url atau _form_, django akan mencocokan url yang di-_request_ dengan url yang sudah didefinisikan pada file urls.py.
 * Setiap url akan dipetakan ke fungsi tertentu yang berada pada file views.py yang akan memanggil fungsi _view_. 
 * Fungsi view ini akan melakukan _query_ terhadap database dengan memanggil objek yang terdapat pada models.py sebagai penghubung. 
-* Setelah itu view function akan mengembalikan _response_ yang dengan format HTML (berkas html).
-* Lalu hasilnya akan dirender oleh template yang akan men-_display_ konten yang user / client akan lihat
+* Setelah itu view function akan mengembalikan _response_  dengan format HTML (berkas html).
+* Lalu hasilnya akan dirender oleh template yang akan men-_display_ konten yang akan dilihat oleh user / client.
