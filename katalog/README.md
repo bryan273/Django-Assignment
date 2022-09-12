@@ -25,6 +25,16 @@ Bila aplikasi yang ingin dibuat hanya aplikasi kecil yang tidak akan digunakan o
 ## Langkah-langkah implementasi
 1. Membuat sebuah fungsi pada views.py yang dapat melakukan pengambilan data dari model dan dikembalikan ke dalam sebuah HTML.
 
-Di dalam views.py, dibuat fungsi view (show_katalog) dengan parameter _request_ dari user. Fungsi ini menggunakan class dari model yang akan memanggil query ke database dan menyimpan hasil query tersebut ke dalam variabel data_katalog. Setelah itu, akan dilakukan render ke katalog.html dan ditambahkan pula context pada pengembalian fungsi render yang dapat dimunculkan pada halaman HTML. 
+Di dalam views.py, dibuat fungsi view (show_katalog) dengan parameter _request_ dari user. Fungsi ini menggunakan class dari model yang akan memanggil query ke database dan menyimpan hasil query tersebut ke dalam variabel data_katalog. Setelah itu, katalog.html akan di-render dan ditambahkan pula context pada pengembalian fungsi render yang dapat dimunculkan pada halaman HTML. 
 
 2. Membuat sebuah routing untuk memetakan fungsi yang telah kamu buat pada views.py.
+
+Routing dilakukan dengan cara menambahkan `path('katalog/', include('katalog.urls'))` pada urls.py di project_django. Routing dilakukan ke urls.py pada katalog. Kemudian urls.py ini akan menjalankan fungsi view show_katalog yang berada di views.py.
+
+3. Memetakan data yang didapatkan ke dalam HTML dengan sintaks dari Django untuk pemetaan data template.
+
+Pemetaan data template dilakukan dari proses _render_ melalui fungsi view pada views.py ke katalog.html. Pada saat render akan dilakukan _mapping_ dengan menggunakan sintaks khusus template pada Django, yaitu `{{data}}`. Data yang terdapat pada konteks akan di _mapping_ ke halaman html tersebut. Selain itu digunakan _looping_ juga terhadap list yang katalog untuk mengambil data dari database yang akan ditampilkan.
+
+4. Melakukan deployment ke Heroku terhadap aplikasi yang sudah kamu buat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
+
+Tahap deployment dilakukan dengan menghubungkan app heroku dengan repository yang terdapat pada github. Setelah itu
