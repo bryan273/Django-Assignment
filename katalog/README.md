@@ -37,4 +37,4 @@ Pemetaan data template dilakukan dari proses _render_ melalui fungsi view pada v
 
 4. Melakukan deployment ke Heroku terhadap aplikasi yang sudah kamu buat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 
-Tahap deployment dilakukan dengan menghubungkan app heroku dengan repository yang terdapat pada github. Setelah itu
+Tahap deployment dilakukan dengan menghubungkan app heroku dengan repository yang terdapat pada github. Setelah itu aplikasi di deploy dan di-run `python manage.py loaddata initial_katalog_data.json` di heroku console agar data ter-_load_. Kemudian diperlukan juga untuk memasukkan variabel HEROKU_APP_NAME dan HEROKU_API_KEY di github secret agar dapat terhubung langsung ke heroku.
