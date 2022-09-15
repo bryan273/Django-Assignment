@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Naruto",
+            "rating": 5,
+            "release_date": "2012-04-23",
+            "review": "The film is very good"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Dummy",
+            "rating": 4,
+            "release_date": "2012-04-24",
+            "review": "The film is good"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Ninja",
+            "rating": 3,
+            "release_date": "2012-04-25",
+            "review": "The film is average"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 4,
+        "fields": {
+            "watched": false,
+            "title": "Hello",
+            "rating": 2,
+            "release_date": "2012-04-26",
+            "review": "The film is bad"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 5,
+        "fields": {
+            "watched": false,
+            "title": "Do not watch",
+            "rating": 1,
+            "release_date": "2012-04-27",
+            "review": "The film is very bad"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Moshi-moshi",
+            "rating": 5,
+            "release_date": "2012-04-28",
+            "review": "The film is very good"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "Movie",
+            "rating": 4,
+            "release_date": "2012-04-29",
+            "review": "The film is good"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 8,
+        "fields": {
+            "watched": true,
+            "title": "Discord",
+            "rating": 3,
+            "release_date": "2012-04-30",
+            "review": "The film is average"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "Line",
+            "rating": 2,
+            "release_date": "2012-05-01",
+            "review": "The film is bad"
+        }
+    },
+    {
+        "model": "mywatchlist.movieitem",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "Iphone",
+            "rating": 5,
+            "release_date": "2012-05-2",
+            "review": "The film is very good"
+        }
+    }
+]
