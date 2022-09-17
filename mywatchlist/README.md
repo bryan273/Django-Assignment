@@ -17,11 +17,10 @@ Di dalam suatu platform terkadang ada pertukaran data antara clients dan juga se
 1. Untuk membuat suatu aplikasi, digunakan perintah `python manage.py startapp mywatchlist` di directory repository yang ingin dibuat.
 2. Menambahkan `path('mywatchlist/', include('mywatchlist.urls')),` di urls.py pada `urlpatterns` di django_project untuk menghubungkan ke urls.py pada mywatchlist. Kemudian pada urls.py di mywatchlist ditambahkan:
 `urlpatterns = [
-    path('html/', show_movie, name='show_movie'),
+    ...,
     path('xml/', show_xml, name='show_xml'),
     path('json/', show_json, name='show_json'),
-    path('json/<int:id>', show_json_by_id, name='show_json_by_id'),
-    path('xml/<int:id>', show_xml_by_id, name='show_xml_by_id'),
+    ...
 ]`
 Penambahan ini bertujuan untuk mapping path tertentu terhadap fungsi view yang ingin ditampilkan
 3. Membuat model baru pada models.py di mywatchlist bernama MyWatchList dengan fields watched, title, rating, release_date, dan review. Setelah itu dilakukan migrasi agar model terbuat pada database.
