@@ -23,3 +23,13 @@ Di dalam suatu platform terkadang ada pertukaran data antara clients dan juga se
 ]`
 Penambahan ini bertujuan untuk mapping path tertentu terhadap fungsi view yang ingin ditampilkan
 3. Membuat model baru pada models.py di mywatchlist bernama MyWatchList dengan fields watched, title, rating, release_date, dan review. Setelah itu dilakukan migrasi agar model terbuat pada database.
+
+# Postman
+## JSON
+<img width="637" alt="image" src="https://user-images.githubusercontent.com/88226713/190852912-c4559b00-4d4b-4d9c-91c6-4dec3216ab65.png">
+
+## XML
+<img width="635" alt="image" src="https://user-images.githubusercontent.com/88226713/190852923-4d4771f2-35fe-4f68-b753-8b15358704f3.png">
+
+## HTML
+<img width="641" alt="image" src="https://user-images.githubusercontent.com/88226713/190852937-252d65aa-ce67-40b0-9584-dbf0f84cbc16.png">
