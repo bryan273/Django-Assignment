@@ -11,3 +11,15 @@ Deployment in json format : [link]([url](https://tugas-django-bryan-1.herokuapp.
 # Alasan diperlukan data delivery dalam pengimplementasian platform
 Di dalam suatu platform terkadang ada pertukaran data antara clients dan juga server. Pertukaran data tersebut tentu harus memerlukan suatu metode. Maka dari itu, digunakanlah metode dari data delivery yang diperuntukkan untuk memudahkan suatu platform dalam melakukan pertukaran data. Metode yang sering digunakan antara lain adalah HTML, JSON, dan XML. Pada dasarnya, metode ini dapat digunakan untuk mengatur data kompleks dalam format tertentu yang dapat dipahami oleh berbagai bahasa pemrograman dan API, sehingga dapat mempermudah pertukaran data.
 
+# Langkah-langkah implementasi
+1. Untuk membuat suatu aplikasi, digunakan perintah `python manage.py startapp mywatchlist` di directory repository yang ingin dibuat.
+2. Menambahkan `path('mywatchlist/', include('mywatchlist.urls')),` di urls.py pada `urlpatterns` di django_project untuk menghubungkan ke urls.py pada mywatchlist. Kemudian pada urls.py di mywatchlist ditambahkan:
+`urlpatterns = [
+    path('html/', show_movie, name='show_movie'),
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'),
+    path('json/<int:id>', show_json_by_id, name='show_json_by_id'),
+    path('xml/<int:id>', show_xml_by_id, name='show_xml_by_id'),
+]`
+Penambahan ini bertujuan untuk mapping path tertentu terhadap fungsi view yang ingin ditampilkan
+3. Membuat model baru pada models.py di mywatchlist bernama MyWatchList dengan fields watched, title, rating, release_date, dan review. Setelah itu dilakukan migrasi agar model terbuat pada database.
