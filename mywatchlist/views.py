@@ -6,9 +6,21 @@ from django.core import serializers
 # Create your views here.
 def show_movie(request):
     data_barang_movie = MovieItem.objects.all()
+    movie_sum = data_barang_movie.count()
+    
+    for movie in data_barang_movie:
+        if (movie.watched): 
+            watched += 1
+
+    if 2*watched > movie_sum : 
+        result = "Selamat, kamu sudah banyak menonton!"
+    else : 
+        result = "Wah, kamu masih sedikit menonton!"   
+        
     context = {
         'list_movie': data_barang_movie,
-        'nama': 'Bryan Tjandra'
+        'nama': 'Bryan Tjandra',
+        'result':result
     }
     return render(request, "mywatchlist.html", context)
 
