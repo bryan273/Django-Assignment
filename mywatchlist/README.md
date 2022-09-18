@@ -11,7 +11,7 @@ Deployment in json format : [link](https://tugas-django-bryan-1.herokuapp.com/my
 * XML atau Extensible Markup Language merupakan suatu markup language yang digunakan untuk menyederhanakan proses penyimpanan dan pengiriman data antarserver. XML cenderung menyimpan data dalam format teks sederhana seperti tree yang mirip dengan HTML. Format ini cenderung mudah dibaca oleh manusia dibandingkan format JSON, tetapi pertukaran data akan berlangsung lebih lama.
 
 # Alasan diperlukan data delivery dalam pengimplementasian platform
-Di dalam suatu platform terkadang ada pertukaran data antara clients dan juga server. Pertukaran data tersebut tentu harus memerlukan suatu metode. Maka dari itu, digunakanlah metode dari data delivery yang diperuntukkan untuk memudahkan suatu platform dalam melakukan pertukaran data. Metode yang sering digunakan antara lain adalah HTML, JSON, dan XML. Pada dasarnya, metode ini dapat digunakan untuk mengatur data kompleks dalam format tertentu yang dapat dipahami oleh berbagai bahasa pemrograman dan API, sehingga dapat mempermudah pertukaran data.
+Di dalam suatu platform terkadang ada pertukaran data antara clients dan juga server. Data delivery diperuntukkan untuk memudahkan suatu platform dalam melakukan pengiriman data. Data tersebut tentu memerlukan berbagai format dalam pertukarannya. Format yang kerapkali digunakan antara lain adalah HTML, JSON, dan XML. Dengan adanya format ini, data yang kompleks dapat diatur dalam format tertentu yang dapat dipahami oleh berbagai bahasa pemrograman dan API, sehingga dapat mempermudah pengiriman data.
 
 # Langkah-langkah implementasi
 1. Untuk membuat suatu aplikasi, digunakan perintah `python manage.py startapp mywatchlist` di directory repository yang ingin dibuat.
