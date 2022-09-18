@@ -8,6 +8,7 @@ def show_movie(request):
     data_barang_movie = MovieItem.objects.all()
     movie_sum = data_barang_movie.count()
     
+    watched = 0
     for movie in data_barang_movie:
         if (movie.watched): 
             watched += 1
