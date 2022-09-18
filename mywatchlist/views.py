@@ -4,8 +4,12 @@ from django.http import HttpResponse
 from django.core import serializers
 
 # Create your views here.
+
+def show_main(request):
+    return render(request, "mywatchlist_main.html")
+
 def show_movie(request):
-    data_barang_movie = MovieItem.objects.all()
+    data_barang_movie = MovieItem.objects.all() 
     movie_sum = data_barang_movie.count()
     
     watched = 0
@@ -17,7 +21,7 @@ def show_movie(request):
         result = "Selamat, kamu sudah banyak menonton!"
     else : 
         result = "Wah, kamu masih sedikit menonton!"   
-        
+
     context = {
         'list_movie': data_barang_movie,
         'nama': 'Bryan Tjandra',
