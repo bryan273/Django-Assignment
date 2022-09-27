@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>To Do List</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "create">
+
+    <h1>To Do List</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Judul: </td>
+                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Deskripsi: </td>
+                <td><input type="text" name="deskripsi" placeholder="Deskripsi" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+{% endblock content %}
