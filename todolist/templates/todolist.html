@@ -16,6 +16,17 @@
             <th>{{todo.date}}</th>
             <th>{{todo.title}}</th>
             <th>{{todo.description}}</th>
+            <th>
+                {% if todo.is_finished %}
+                Finished
+                {% else %}
+                Not Yet
+                {% endif%}
+              </th>
+              <th>
+                <button><a href="{% url 'todolist:delete' todo.id %}" title="">Delete</a></button>
+                <button><a href="{% url 'todolist:change' todo.id %}" title="">Change Status</a></button>
+              </th>
         </tr>
     {% endfor %}
 </table>
@@ -23,6 +34,5 @@
 <button><a href="{% url 'todolist:show_create_todo' %}">Tambah Task Baru</a></button>
 <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
 <br>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 {% endblock content %}

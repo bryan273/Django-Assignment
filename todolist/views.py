@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -18,7 +19,6 @@ def show_todolist(request):
     context = {
     'list_todo': data_todo,
     'nama': 'Bryan Tjandra',
-    'last_login': request.COOKIES['last_login'],
     }
     return render(request, "todolist.html",context=context)
 
@@ -63,8 +63,23 @@ def show_create_todo(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('deskripsi')
-        todo = TodoListEntry.objects.create(title=title, description=description,date=datetime.date.today(), user=request.user)
+        is_finished = False
+        todo = TodoListEntry.objects.create(title=title, 
+                                            description=description,
+                                            date=datetime.date.today(), 
+                                            user=request.user,
+                                            is_finished=is_finished)
         response = HttpResponseRedirect(reverse("todolist:show_todolist")) 
         return response
 
     return render(request, "create.html")
+
+def delete(request, pk):
+    TodoListEntry.objects.filter(id=pk).delete()
+    return redirect('todolist:show_todolist')
+
+def change(request, pk):
+    data = TodoListEntry.objects.get(id=pk)
+    data.is_finished = not(data.is_finished)
+    data.save()
+    return redirect('todolist:show_todolist')
