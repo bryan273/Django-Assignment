@@ -1,38 +1,53 @@
-{% extends 'base.html' %}
+<title>Todolist</title>
+{% load static tailwind_tags %}
+{% tailwind_css %}
 
-{% block content %}
-<h3>Nama: </h3>
-<p>{{nama}}</p>
-<br>
-<table border="1">
-    <tr>
-    <th>Tanggal</th>
-    <th>Judul</th>
-    <th>Deskripsi</th>
-    </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for todo in list_todo %}
-        <tr>
-            <th>{{todo.date}}</th>
-            <th>{{todo.title}}</th>
-            <th>{{todo.description}}</th>
-            <th>
+<div class="bg-slate-400 min-h-screen">
+
+  <div class="bg-gray-500 h-16 w-screen">
+    <div class="flex justify-between">
+      <div class="p-2 px-4 font-semibold text-blue-800 text-2xl md:text-3xl lg:text-4xl">
+        To Do List
+      </div>
+      <div class="p-2 flex gap-2 lg:gap-3 pr-4">
+        <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
+        <a href="{% url 'todolist:show_create_todo' %}"></a>Create Task</button>
+
+        <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
+        <a href="{% url 'todolist:logout' %}">Logout</a></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="flex justify-center items-center bg-slate-400 mt-4"> -->
+    <div class=" flex items-center justify-center">
+      <h1 class="font-bold text-2xl text-center mt-4">Hello, {{username}}</h1>
+    </div>
+    <div class="flex justify-center items-center bg-slate-400 h-fit mt-2 gap-4 p-4">
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:gap-4 w-fit">
+        {% for todo in list_todo %}
+          <div class="w-[300px] bg-white rounded-2xl p-2 shadow-xl flex flex-col gap-2">
+              <p class="text-center text-xl font-semibold">{{todo.title}} </p>
+              <p class="text-center text-xs">{{todo.date}}</p>
+            <div class="flex m-2 p-2 flex-col">
+              <div class="transition-opacity bg-gray-800 bg-opacity-10 rounded-2xl">
+              <p>{{todo.description}}</p>
+              <p>
+                Status : 
                 {% if todo.is_finished %}
                 Finished
                 {% else %}
                 Not Yet
-                {% endif%}
-              </th>
-              <th>
-                <button><a href="{% url 'todolist:delete' todo.id %}" title="">Delete</a></button>
-                <button><a href="{% url 'todolist:change' todo.id %}" title="">Change Status</a></button>
-              </th>
-        </tr>
-    {% endfor %}
-</table>
-<br>
-<button><a href="{% url 'todolist:show_create_todo' %}">Tambah Task Baru</a></button>
-<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-<br>
-
-{% endblock content %}
+                {% endif %}
+              </p>
+            </div>
+          </div>
+          <div class="w-full flex justify-center gap-2">
+            <button class=" bg-red-600 rounded-2xl p-2 text-white font-bold"><a href="{% url 'todolist:delete' todo.id %}" title="">Delete</a></button>
+            <button class=" bg-green-500 rounded-2xl p-2 text-white font-bold"><a href="{% url 'todolist:change' todo.id %}" title="">Change Status</a></button>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  <!-- </div> -->
+</div>
