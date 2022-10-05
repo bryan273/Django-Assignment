@@ -1,3 +1,5 @@
+django-browser-reload==1.6.0
+django-tailwind==3.4.0
 asgiref==3.5.2
 certifi==2022.6.15
 charset-normalizer==2.1.1
