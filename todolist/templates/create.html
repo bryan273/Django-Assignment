@@ -5,31 +5,39 @@
 {% endblock meta %}
 
 {% block content %}
+{% load tailwind_tags %}
+{% tailwind_css %}
 
-<div class = "create">
+<div class = " bg-slate-400 h-screen">
+    <div class = "h-screen login flex justify-center items-center">
+        <div class="block bg-white shadow-lg rounded-lg p-8">
+            <div class="rounded-2xl w-full flex justify-left">
+                <h1 class="font-bold text-blue-500 text-2xl mt-0.5 mb-1 pb-2">To Do List</h1>
+            </div>
 
-    <h1>To Do List</h1>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <div class="font-bold">Judul: </div>
+                        <div><input type="text" name="title" placeholder="Title" class="form-control"></div>
+                    </tr>
+                    <div class="p-2"></div>
+                    <tr>
+                        <div class="font-bold">Deskripsi: </div>
+                        <div><input type="text" name="deskripsi" placeholder="Deskripsi" class="form-control"></div>
+                    </tr>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Judul: </td>
-                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Deskripsi: </td>
-                <td><input type="text" name="deskripsi" placeholder="Deskripsi" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Submit"></td>
-            </tr>
-        </table>
-    </form>
-
+                    <tr>
+                        <div class="text-center lg:text-center pt-8">
+                            <input class="inline-block px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
+                            type="submit" value="Submit">
+                        </div>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

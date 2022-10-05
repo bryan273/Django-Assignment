@@ -1,54 +1,59 @@
+{% extends 'base.html' %}
+
+{% block meta %}
 <title>Todolist</title>
+{% endblock meta %}
+
+{% block content %}
+
 {% load static tailwind_tags %}
 {% tailwind_css %}
+<div class="bg-slate-400">
 
-<div class="bg-slate-400 min-h-screen">
-
-  <div class="bg-gray-500 h-16 w-screen">
-    <div class="flex justify-between">
-      <div class="p-2 px-4 font-semibold text-blue-800 text-2xl md:text-3xl lg:text-4xl">
+  <div class="h-16 w-full shadow-lg drop-shadow-lg flex md:justify-between justify-end items-center px-10 sticky top-0 bg-gray-500 z-50">
+      <div class="p-2 px-2 font-semibold text-blue-800 text-3xl hidden md:flex">
         To Do List
       </div>
-      <div class="p-2 flex gap-2 lg:gap-3 pr-4">
+      <div class="flex gap-2">
         <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
               onclick="location.href='/todolist/create-task'">
         Create Task</button>
         
-        <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
-        <a href="{% url 'todolist:logout' %}">Logout</a></button>
+        <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
+              onclick="location.href='/todolist/logout'">
+        Logout</button>
       </div>
-    </div>
   </div>
-
-  <!-- <div class="flex justify-center items-center bg-slate-400 mt-4"> -->
-    <div class=" flex items-center justify-center">
-      <h1 class="font-bold text-2xl text-center mt-4">Hello, {{username}}</h1>
-    </div>
-    <div class="flex justify-center items-center bg-slate-400 h-fit mt-2 gap-4 p-4">
-      <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:gap-4 w-fit">
+  <div class=" flex items-center justify-center">
+    <h1 class="font-bold text-2xl text-center mt-4">Hello, {{username}}</h1>
+  </div>
+  <div class="max-w-[80%] mx-auto h-screen pt-5">
+    <div class="flex flex-wrap gap-5 justify-center">
         {% for todo in list_todo %}
-          <div class="w-[300px] bg-white rounded-2xl p-2 shadow-xl flex flex-col gap-2">
+        <div class="w-[300px] hover:scale-110 bg-white h-fit rounded-xl shadow-xl drop-shadow-xl break-inside-avoid px-5 py-5">
               <p class="text-center text-xl font-semibold">{{todo.title}} </p>
               <p class="text-center text-xs">{{todo.date}}</p>
-            <div class="flex m-2 p-2 flex-col">
-              <div class="transition-opacity bg-gray-800 bg-opacity-10 rounded-2xl">
-              <p>{{todo.description}}</p>
-              <p class="text-green">
-                Done : 
+              <p class="text-center text-orange-300">
                 {% if todo.is_finished %}
                 Yes
                 {% else %}
                 No
                 {% endif %}
               </p>
+            <div class="flex m-2 p-2 flex-col">
+              <div class="px-3 transition-opacity bg-gray-800 bg-opacity-10 rounded-2xl">
+              <p class="text-center">{{todo.description}}</p>
             </div>
           </div>
-          <div class="w-full flex justify-center gap-2">
-            <button class=" bg-red-600 rounded-2xl p-2 text-white font-bold"><a href="{% url 'todolist:delete' todo.id %}" title="">Delete</a></button>
-            <button class=" bg-green-500 rounded-2xl p-2 text-white font-bold"><a href="{% url 'todolist:change' todo.id %}" title="">Change Status</a></button>
+          <div class="w-full flex justify-center gap-2 px-4 pb-1">
+            <button class="w-24 py-2 bg-red-500 rounded-2xl text-white font-bold text-sm leading-snug uppercase shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
+              <a href="{% url 'todolist:delete' todo.id %}" title="">Delete</a></button>
+            <button class="w-32 py-2 bg-green-500 rounded-2xl text-white font-bold text-sm leading-snug uppercase shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
+              <a href="{% url 'todolist:change' todo.id %}" title="">Change Status</a></button>
           </div>
         </div>
       {% endfor %}
     </div>
   <!-- </div> -->
 </div>
+{% endblock content %}

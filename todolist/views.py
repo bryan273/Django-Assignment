@@ -19,6 +19,7 @@ def show_todolist(request):
     context = {
     'list_todo': data_todo,
     'nama': 'Bryan Tjandra',
+    'username' :  request.user.username,
     }
     return render(request, "todolist.html",context=context)
 
