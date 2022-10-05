@@ -20,3 +20,12 @@ Perbedaan dari inline, internal, external terdapat pada cara penggunaan CSS di f
 - ID Selector, digunakan untuk menambah style pada suatu ID sebagai _selector_-nya. Untuk menggunakan ID Selector, dipakai '#' diikuti nama ID.
 - Class Selector, digunakan untuk menambah style pada suatu elemen dengan class sebagai _selector_-nya. Untuk menggunakan Class Selector, dipakai '.' diikuti nama class
 - Element Selector, digunakan untuk menambah style dengan tag sebagai _selector_. Pengunannya diawali dengan nama_tag {...}.
+
+## Implementasi
+1. Digunakan library tailwind untuk _styling_ app todolist. Instalasi library tailwind, disesuaikan dengan cara pada [link](https://django-tailwind.readthedocs.io/en/latest/installation.html).
+2. Styling login,create,register,todolist dengan metode mirip seperti inline css
+3. Melakukan centering pada setiap page
+4. Kustomisasi tombol berdasar referensi [link](https://tailwind-elements.com/docs/standard/components/login-form/)
+5. Menambahkan navbar pada todolist
+6. Menambahkan card pada todolist disertai fitur delete dan juga change status to do list dalam bentuk card
+7. Menambahkan style responsive dengan breakpoints yang telah disediakan. Contoh : max-w-[80%] mx-auto
