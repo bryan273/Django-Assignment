@@ -17,3 +17,6 @@ Perbedaan dari inline, internal, external terdapat pada cara penggunaan CSS di f
 
 ## CSS Selector
 
+- ID Selector, digunakan untuk menambah style pada suatu ID sebagai _selector_-nya. Untuk menggunakan ID Selector, dipakai '#' diikuti nama ID.
+- Class Selector, digunakan untuk menambah style pada suatu elemen dengan class sebagai _selector_-nya. Untuk menggunakan Class Selector, dipakai '.' diikuti nama class
+- Element Selector, digunakan untuk menambah style dengan tag sebagai _selector_. Pengunannya diawali dengan nama_tag {...}.
