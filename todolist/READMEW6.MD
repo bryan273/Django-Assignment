@@ -13,3 +13,14 @@ Event-Driven Programming merupakan suatu konsep di mana alur program bergantung 
 
 ## Penerapan Asynchronous Programming AJAX
 Ketika user melalukan event driven programming, Ajax akan menampung data yang akan dikirimkan ke server agar ada update data secara asinkron. Atau ketika kondisi AJAX get dan post, data yang didapatkan akan dikirimkan ke server dan akan di-update tanpa perlu di-reload
+
+## Implementasi
+1. Membuat fungsi show_ajax pada views.py yang akan mereturn JSONResponse berupa data yang telah di-POST.
+2. Membuat route di urls.py ke todolist/json dan memanggil fungsi show_ajax
+3. Membuat fungsi bernama loadData untuk merender cards todolist dengan method GET dari todolist/json. Render kemudian dimasukkan kedalam card
+4. Membuat document.ready agar saat pertama kali website direfresh, akan loadData
+5. Membuat modal sesuai referensi https://getbootstrap.com/docs/5.2/components/modal/
+6. Memasukkan kode untuk membuat todo di dalam modal, dan ketika submit akan diarahkan untuk memanggil fungsi add_ajax
+7. Setelah disubmit, akan dikirimkan response ajax POST ke todolist/add
+8. Setelah itu diambil data yang di post dan ditambahkan ke card
+9. Membuat fungsi delete dengan ajax supaya bersifat asinkronus dengan fungsi delDB
