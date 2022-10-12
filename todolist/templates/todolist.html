@@ -8,51 +8,162 @@
 
 {% load static tailwind_tags %}
 {% tailwind_css %}
-<div class="h-16 w-full shadow-lg drop-shadow-lg flex md:justify-between justify-end items-center px-10 top-0 bg-gray-500 z-50">
-  <div class="p-2 px-2 font-semibold text-blue-800 text-3xl hidden md:flex">
-    To Do List
-  </div>
-  <div class="flex gap-2">
-    <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
-          onclick="location.href='/todolist/create-task'">
-    Create Task</button>
-    
-    <button class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
-          onclick="location.href='/todolist/logout'">
-    Logout</button>
-  </div>
-</div>
-<div class="bg-slate-400 min-h-screen py-5" >
 
-  <div class=" flex items-center justify-center m-20">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    const modal_overlay = document.querySelector('#modal_overlay');
+    const modal = document.querySelector('#modal');
+    const nama = document.getElementById('nama');
+    const desc = document.getElementById('desc');
+    const card = (i) =>`
+                  <div id="${i.pk}" class="w-[300px] hover:scale-110 bg-white rounded-xl shadow-xl drop-shadow-xl break-inside-avoid px-5 py-5">
+                      <p class="text-center text-xl font-semibold">${i.fields.title}</p>
+                      <p class="text-center text-xs">${i.fields.date}</p>
+                      <p class="text-center text-orange-300">
+                        ${status}
+                      </p>
+                    <div class="flex m-2 p-2 flex-col">
+                      <div class="px-3 transition-opacity bg-gray-800 bg-opacity-10 rounded-2xl">
+                        <p class="text-center break-words whitespace-pre-wrap">${i.fields.description}</p>
+                      </div>
+                    </div>
+                    <div class="w-full flex justify-end gap-2 px-4 pb-1">
+                      <button class="w-24 py-2 bg-red-500 rounded-lg text-white font-semibold text-sm leading-snug uppercase shadow-md hover:bg-red-300 hover:shadow-lg focus:bg-red-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-300 active:shadow-lg transition duration-150 ease-in-out delete"
+                        onclick="delDB(${i.pk})">Delete</button>
+                      <button class="w-32 py-2 bg-green-500 rounded-lg text-white font-semibold text-sm leading-snug uppercase shadow-md hover:bg-green-300 hover:shadow-lg focus:bg-green-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-300 active:shadow-lg transition duration-150 ease-in-out">
+                        <a href="change/${i.pk}" title="">Change Status</a></button>
+                    </div>
+                  </div>`
+
+    $(document).ready(function () {
+      console.log("hi")
+      loadData();
+
+      $('#post-card').click(function (e) {
+        console.log("add")
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: "{% url 'todolist:add_ajax' %}",
+          data: {
+            nama: $("#nama").val(),
+            desc: $("#desc").val(),
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+          },
+          dataType: "json",
+          success: function (result, status) {
+            console.log("load data")
+            // document.getElementById("todoCard").innerHTML = ""
+            $('#todoCard').append(card(result));
+            $('#nama').val('')
+            $('#desc').val('')
+          },
+        });
+      })
+    });
+
+
+    function delDB(val) {
+      console.log("delete");
+      $.ajax({
+        type: "GET",
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        url: `/todolist/delete/${val}`,
+        success: function () {
+          console.log(12333);
+          $(`#${val}`).remove()
+        },
+      })
+    }
+
+    function loadData() {
+      console.log("load")
+      $.ajax({
+        url: "{% url 'todolist:show_json' %}",
+        type: "GET",
+        dataType: "json",
+        success: function (resp) {
+          console.log(resp)
+          for (let i of resp) {
+            let status = i.fields.is_finished ? "Done" : "Not Yet";
+            // console.log(tab)
+            $('#todoCard').append(card(i));
+          }
+        },
+        error: function (resp) {
+          console.log('Error?');
+        }
+      })
+    };
+
+  </script>
+</head>
+
+<div class="bg-slate-400 min-h-screen">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Add To Do</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="">
+            {% csrf_token %}
+            <table>
+              <tr>
+                <div class="font-bold">Judul: </div>
+                <div><input type="text" name="title" placeholder="Title" class="form-control" required id="nama"></div>
+              </tr>
+              <div class="p-2"></div>
+              <tr>
+                <div class="font-bold">Deskripsi: </div>
+                <div><input type="text" name="deskripsi" placeholder="Deskripsi" class="form-control" required
+                    id="desc"></div>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="bg-red-500 px-3 py-2 font-semibold text-white rounded-lg h-auto"
+            data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="button"
+          id="post-card"
+            class="px-3 py-2 font-semibold bg-green-500 text-white rounded-lg disabled:opacity-40"
+            data-bs-dismiss="modal">
+            Add Todo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="h-16 w-full shadow-lg drop-shadow-lg flex md:justify-between justify-end items-center px-10 top-0 bg-gray-500 z-50">
+    <div class="p-2 px-2 font-semibold text-blue-800 text-3xl hidden md:flex">
+      To Do List
+    </div>
+    <div class="flex gap-2">
+      <button
+        class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
+        data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create Task</button>
+
+      <button
+        class="w-36 px-7 py-3 bg-blue-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out"
+        onclick="location.href='/todolist/logout'">
+        Logout</button>
+    </div>
+  </div>
+  <div class=" flex items-center justify-center">
     <h1 class="font-bold text-2xl text-center mt-4">Hello, {{username}}</h1>
   </div>
-  <div class="max-w-[80%] mx-auto h-full pt-5 pb-32">
-    <div class="flex flex-wrap gap-5 justify-center">
-        {% for todo in list_todo %}
-        <div class="w-[300px] hover:scale-110 bg-white rounded-xl shadow-xl drop-shadow-xl break-inside-avoid px-5 py-5">
-            <p class="text-center text-xl font-semibold">{{todo.title}} </p>
-            <p class="text-center text-xs">{{todo.date}}</p>
-            <p class="text-center text-orange-300">
-              {% if todo.is_finished %}
-              Yes
-              {% else %}
-              No
-              {% endif %}
-            </p>
-          <div class="flex m-2 p-2 flex-col">
-            <div class="px-3 transition-opacity bg-gray-800 bg-opacity-10 rounded-2xl">
-              <p class="text-center break-words whitespace-pre-wrap">{{todo.description}}</p>
-            </div>
-          </div>
-          <div class="w-full flex justify-end gap-2 px-4 pb-1">
-            <button class="w-24 py-2 bg-red-500 rounded-2xl text-white font-bold text-sm leading-snug uppercase shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
-              <a href="{% url 'todolist:delete' todo.id %}" title="">Delete</a></button>
-            <button class="w-32 py-2 bg-green-500 rounded-2xl text-white font-bold text-sm leading-snug uppercase shadow-md hover:bg-blue-400 hover:shadow-lg focus:bg-blue-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-150 ease-in-out">
-              <a href="{% url 'todolist:change' todo.id %}" title="">Change Status</a></button>
-          </div>
-        </div>
-      {% endfor %}
+  <div class="max-w-[80%] mx-auto h-full pt-5 pb-10">
+    <div class="flex flex-wrap gap-5 justify-center" id="todoCard">
+
     </div>
   </div>
 </div>

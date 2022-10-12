@@ -6,10 +6,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
-from django.shortcuts import get_object_or_404
-
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 @login_required(login_url='login/')
@@ -75,6 +74,8 @@ def show_create_todo(request):
 
     return render(request, "create.html")
 
+# butuh diubah
+@csrf_exempt  
 def delete(request, pk):
     TodoListEntry.objects.filter(id=pk).delete()
     return redirect('todolist:show_todolist')
@@ -84,3 +85,32 @@ def change(request, pk):
     data.is_finished = not(data.is_finished)
     data.save()
     return redirect('todolist:show_todolist')
+
+@login_required(login_url='/todolist/login/')
+def show_json(request):
+    user = TodoListEntry.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', user), content_type='application/json')
+
+@login_required(login_url='/todolist/login/')
+def add_ajax(request):
+    if request.method == 'POST':
+        title = request.POST.get('nama')
+        description = request.POST.get('desc')
+        is_finished = False
+        todo = TodoListEntry.objects.create(title=title, 
+                                            description=description,
+                                            date=datetime.date.today(), 
+                                            user=request.user,
+                                            is_finished=is_finished)
+        todo.save()
+        
+        result = {
+            'fields':{
+                'title':todo.title,
+                'description':todo.description,
+                'is_finished':todo.is_finished,
+                'date':todo.date,
+            },
+            'pk':todo.pk
+        }
+        return JsonResponse(result,status=200)
