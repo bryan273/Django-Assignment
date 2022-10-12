@@ -12,6 +12,7 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
+    let status;
     const modal_overlay = document.querySelector('#modal_overlay');
     const modal = document.querySelector('#modal');
     const nama = document.getElementById('nama');
@@ -54,7 +55,6 @@
           dataType: "json",
           success: function (result, status) {
             console.log("load data")
-            // document.getElementById("todoCard").innerHTML = ""
             $('#todoCard').append(card(result));
             $('#nama').val('')
             $('#desc').val('')
@@ -86,7 +86,7 @@
         success: function (resp) {
           console.log(resp)
           for (let i of resp) {
-            let status = i.fields.is_finished ? "Done" : "Not Yet";
+            status = i.fields.is_finished ? "Done" : "Not Yet";
             // console.log(tab)
             $('#todoCard').append(card(i));
           }
