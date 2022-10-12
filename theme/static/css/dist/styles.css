@@ -807,6 +807,10 @@ select {
   margin: 0px;
 }
 
+.m-20 {
+  margin: 5rem;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -894,12 +898,6 @@ select {
 
 .h-full {
   height: 100%;
-}
-
-.h-fit {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .min-h-screen {
@@ -1099,14 +1097,14 @@ select {
   padding-right: 0.5rem;
 }
 
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .px-3 {
@@ -1132,6 +1130,10 @@ select {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
 }
 
 .pb-1 {
